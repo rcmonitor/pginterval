@@ -7,6 +7,9 @@ import (
 	"github.com/rcmonitor/pginterval"
 )
 
+//var tAlmostDay = 23 * time.Hour + 59 * time.Minute + 59 * time.Second
+var tAlmostDay = 24 * time.Hour - 1 * time.Second
+
 var slsdPGInterval = []struct{
 	interval string
 	duration time.Duration
@@ -17,6 +20,9 @@ var slsdPGInterval = []struct{
 	{"00:00:01", 1 * time.Second, false},
 	{"00:05:00", 5 * time.Minute, false},
 	{"20 10:40:45", -1, true},
+	{"23:59:59", tAlmostDay, false},
+	{"01:00:00", 1 * time.Hour, false},
+	{"00:00:10", 10 * time.Second, false},
 }
 
 func TestFParse(t *testing.T) {
